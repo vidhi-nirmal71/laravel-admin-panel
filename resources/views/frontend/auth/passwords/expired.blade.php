@@ -13,17 +13,12 @@
                 </div><!--card-header-->
 
                 <div class="card-body">
-                    {{ html()->form('PATCH', route('frontend.auth.password.expired.update'))->class('form-horizontal')->open() }}
-
+                    <form method="PATCH" action="{{ route('frontend.auth.password.expired.update') }}" class="form-horizontal">
                         <div class="row">
                             <div class="col">
                                 <div class="form-group">
-                                    {{ html()->label(__('validation.attributes.frontend.old_password'))->for('old_password') }}
-
-                                    {{ html()->password('old_password')
-                                        ->class('form-control')
-                                        ->placeholder(__('validation.attributes.frontend.old_password'))
-                                        ->required() }}
+                                    <label for="old_password">@lang('validation.attributes.frontend.old_password')</label>
+                                    <input type="password" name="old_password" id="old_password" class="form-control" placeholder="@lang('validation.attributes.frontend.old_password')" required>
                                 </div><!--form-group-->
                             </div><!--col-->
                         </div><!--row-->
@@ -31,12 +26,8 @@
                         <div class="row">
                             <div class="col">
                                 <div class="form-group">
-                                    {{ html()->label(__('validation.attributes.frontend.password'))->for('password') }}
-
-                                    {{ html()->password('password')
-                                        ->class('form-control')
-                                        ->placeholder(__('validation.attributes.frontend.password'))
-                                        ->required() }}
+                                    <label for="password">@lang('validation.attributes.frontend.password')</label>
+                                    <input type="password" name="password" id="password" class="form-control" placeholder="@lang('validation.attributes.frontend.password')" required>
                                 </div><!--form-group-->
                             </div><!--col-->
                         </div><!--row-->
@@ -44,12 +35,8 @@
                         <div class="row">
                             <div class="col">
                                 <div class="form-group">
-                                    {{ html()->label(__('validation.attributes.frontend.password_confirmation'))->for('password_confirmation') }}
-
-                                    {{ html()->password('password_confirmation')
-                                        ->class('form-control')
-                                        ->placeholder(__('validation.attributes.frontend.password_confirmation'))
-                                        ->required() }}
+                                    <label for="password_confirmation">@lang('validation.attributes.frontend.password_confirmation')</label>
+                                    <input type="password" name="password_confirmation" id="password_confirmation" class="form-control" placeholder="@lang('validation.attributes.frontend.password_confirmation')" required>
                                 </div><!--form-group-->
                             </div><!--col-->
                         </div><!--row-->
@@ -57,12 +44,11 @@
                         <div class="row">
                             <div class="col">
                                 <div class="form-group mb-0 clearfix">
-                                    {{ form_submit(__('labels.frontend.passwords.update_password_button')) }}
+                                    <button type="submit" class="btn btn-primary">@lang('labels.frontend.passwords.update_password_button')</button>
                                 </div><!--form-group-->
                             </div><!--col-->
                         </div><!--row-->
-
-                    {{ html()->form()->close() }}
+                    </form>
                 </div><!-- card-body -->
             </div><!-- card -->
         </div><!-- col-6 -->

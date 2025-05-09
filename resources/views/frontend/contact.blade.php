@@ -13,18 +13,13 @@
                 </div><!--card-header-->
 
                 <div class="card-body">
-                    {{ html()->form('POST', route('frontend.contact.send'))->open() }}
+                    <form method="POST" action="{{ route('frontend.contact.send') }}">
+                        @csrf
                         <div class="row">
                             <div class="col">
                                 <div class="form-group">
-                                    {{ html()->label(__('validation.attributes.frontend.name'))->for('name') }}
-
-                                    {{ html()->text('name', optional(auth()->user())->name)
-                                        ->class('form-control')
-                                        ->placeholder(__('validation.attributes.frontend.name'))
-                                        ->attribute('maxlength', 191)
-                                        ->required()
-                                        ->autofocus() }}
+                                    <label for="name">{{ __('validation.attributes.frontend.name') }}</label>
+                                    <input type="text" name="name" id="name" class="form-control" placeholder="{{ __('validation.attributes.frontend.name') }}" maxlength="191" value="{{ optional(auth()->user())->name }}" required autofocus>
                                 </div><!--form-group-->
                             </div><!--col-->
                         </div><!--row-->
@@ -32,13 +27,8 @@
                         <div class="row">
                             <div class="col">
                                 <div class="form-group">
-                                    {{ html()->label(__('validation.attributes.frontend.email'))->for('email') }}
-
-                                    {{ html()->email('email', optional(auth()->user())->email)
-                                        ->class('form-control')
-                                        ->placeholder(__('validation.attributes.frontend.email'))
-                                        ->attribute('maxlength', 191)
-                                        ->required() }}
+                                    <label for="email">{{ __('validation.attributes.frontend.email') }}</label>
+                                    <input type="email" name="email" id="email" class="form-control" placeholder="{{ __('validation.attributes.frontend.email') }}" maxlength="191" value="{{ optional(auth()->user())->email }}" required>
                                 </div><!--form-group-->
                             </div><!--col-->
                         </div><!--row-->
@@ -46,13 +36,8 @@
                         <div class="row">
                             <div class="col">
                                 <div class="form-group">
-                                    {{ html()->label(__('validation.attributes.frontend.phone'))->for('phone') }}
-
-                                    {{ html()->text('phone')
-                                        ->class('form-control')
-                                        ->placeholder(__('validation.attributes.frontend.phone'))
-                                        ->attribute('maxlength', 191)
-                                        ->required() }}
+                                    <label for="phone">{{ __('validation.attributes.frontend.phone') }}</label>
+                                    <input type="text" name="phone" id="phone" class="form-control" placeholder="{{ __('validation.attributes.frontend.phone') }}" maxlength="191" required>
                                 </div><!--form-group-->
                             </div><!--col-->
                         </div><!--row-->
@@ -60,13 +45,8 @@
                         <div class="row">
                             <div class="col">
                                 <div class="form-group">
-                                    {{ html()->label(__('validation.attributes.frontend.message'))->for('message') }}
-
-                                    {{ html()->textarea('message')
-                                        ->class('form-control')
-                                        ->placeholder(__('validation.attributes.frontend.message'))
-                                        ->attribute('rows', 3)
-                                        ->required() }}
+                                    <label for="message">{{ __('validation.attributes.frontend.message') }}</label>
+                                    <textarea name="message" id="message" class="form-control" placeholder="{{ __('validation.attributes.frontend.message') }}" rows="3" required></textarea>
                                 </div><!--form-group-->
                             </div><!--col-->
                         </div><!--row-->
@@ -75,7 +55,7 @@
                             <div class="row">
                                 <div class="col">
                                     @captcha
-                                    {{ html()->hidden('captcha_status', 'true') }}
+                                    <input type="hidden" name="captcha_status" value="true">
                                 </div><!--col-->
                             </div><!--row-->
                         @endif
@@ -83,11 +63,11 @@
                         <div class="row">
                             <div class="col">
                                 <div class="form-group mb-0 clearfix">
-                                    {{ form_submit(__('labels.frontend.contact.button')) }}
+                                    <button type="submit" class="btn btn-primary">{{ __('labels.frontend.contact.button') }}</button>
                                 </div><!--form-group-->
                             </div><!--col-->
                         </div><!--row-->
-                    {{ html()->form()->close() }}
+                    </form>
                 </div><!--card-body-->
             </div><!--card-->
         </div><!--col-->

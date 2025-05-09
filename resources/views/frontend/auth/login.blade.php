@@ -13,69 +13,75 @@
                 </div><!--card-header-->
 
                 <div class="card-body">
-                    {{ html()->form('POST', route('frontend.auth.login.post'))->open() }}
+                    <form method="POST" action="{{ route('frontend.auth.login.post') }}"> 
+                    @csrf
                         <div class="row">
                             <div class="col">
                                 <div class="form-group">
-                                    {{ html()->label(__('validation.attributes.frontend.email'))->for('email') }}
-
-                                    {{ html()->email('email')
-                                        ->class('form-control')
-                                        ->placeholder(__('validation.attributes.frontend.email'))
-                                        ->attribute('maxlength', 191)
-                                        ->required() }}
-                                </div><!--form-group-->
-                            </div><!--col-->
-                        </div><!--row-->
-
+                                    <label for="email">{{ __('validation.attributes.frontend.email') }}</label>
+                                    <input type="email" name="email" id="email"
+                                        class="form-control"
+                                        placeholder="{{ __('validation.attributes.frontend.email') }}"
+                                        maxlength="191"
+                                        required>
+                                </div>
+                            </div>
+                        </div>
+                        
                         <div class="row">
                             <div class="col">
                                 <div class="form-group">
-                                    {{ html()->label(__('validation.attributes.frontend.password'))->for('password') }}
-
-                                    {{ html()->password('password')
-                                        ->class('form-control')
-                                        ->placeholder(__('validation.attributes.frontend.password'))
-                                        ->required() }}
-                                </div><!--form-group-->
-                            </div><!--col-->
-                        </div><!--row-->
-
+                                    <label for="password">{{ __('validation.attributes.frontend.password') }}</label>
+                                    <input type="password" name="password" id="password"
+                                        class="form-control"
+                                        placeholder="{{ __('validation.attributes.frontend.password') }}"
+                                        required>
+                                </div>
+                            </div>
+                        </div>
+                        
                         <div class="row">
                             <div class="col">
                                 <div class="form-group">
                                     <div class="checkbox">
-                                        {{ html()->label(html()->checkbox('remember', true, 1) . ' ' . __('labels.frontend.auth.remember_me'))->for('remember') }}
+                                        <label>
+                                            <input type="checkbox" name="remember" value="1" checked>
+                                            {{ __('labels.frontend.auth.remember_me') }}
+                                        </label>
                                     </div>
-                                </div><!--form-group-->
-                            </div><!--col-->
-                        </div><!--row-->
-
+                                </div>
+                            </div>
+                        </div>
+                        
                         <div class="row">
                             <div class="col">
                                 <div class="form-group clearfix">
-                                    {{ form_submit(__('labels.frontend.auth.login_button')) }}
-                                </div><!--form-group-->
-                            </div><!--col-->
-                        </div><!--row-->
-
+                                    <button type="submit" class="btn btn-primary">
+                                        {{ __('labels.frontend.auth.login_button') }}
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        
                         @if(config('access.captcha.login'))
                             <div class="row">
                                 <div class="col">
                                     @captcha
-                                    {{ html()->hidden('captcha_status', 'true') }}
-                                </div><!--col-->
-                            </div><!--row-->
+                                    <input type="hidden" name="captcha_status" value="true">
+                                </div>
+                            </div>
                         @endif
-
+                        
                         <div class="row">
                             <div class="col">
                                 <div class="form-group text-right">
-                                    <a href="{{ route('frontend.auth.password.reset') }}">@lang('labels.frontend.passwords.forgot_password')</a>
-                                </div><!--form-group-->
-                            </div><!--col-->
-                        </div><!--row-->
-                    {{ html()->form()->close() }}
+                                    <a href="{{ route('frontend.auth.password.reset') }}">
+                                        @lang('labels.frontend.passwords.forgot_password')
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
 
                     <div class="row">
                         <div class="col">

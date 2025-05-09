@@ -13,29 +13,20 @@
                 </div><!--card-header-->
 
                 <div class="card-body">
-                    {{ html()->form('POST', route('frontend.auth.register.post'))->open() }}
+                    <form method="POST" action="{{ route('frontend.auth.register.post') }}">
+                        @csrf
                         <div class="row">
                             <div class="col-12 col-md-6">
                                 <div class="form-group">
-                                    {{ html()->label(__('validation.attributes.frontend.first_name'))->for('first_name') }}
-
-                                    {{ html()->text('first_name')
-                                        ->class('form-control')
-                                        ->placeholder(__('validation.attributes.frontend.first_name'))
-                                        ->attribute('maxlength', 191)
-                                        ->required()}}
+                                    <label for="first_name">@lang('validation.attributes.frontend.first_name')</label>
+                                    <input type="text" name="first_name" id="first_name" class="form-control" placeholder="@lang('validation.attributes.frontend.first_name')" maxlength="191" required>
                                 </div><!--col-->
                             </div><!--row-->
 
                             <div class="col-12 col-md-6">
                                 <div class="form-group">
-                                    {{ html()->label(__('validation.attributes.frontend.last_name'))->for('last_name') }}
-
-                                    {{ html()->text('last_name')
-                                        ->class('form-control')
-                                        ->placeholder(__('validation.attributes.frontend.last_name'))
-                                        ->attribute('maxlength', 191)
-                                        ->required() }}
+                                    <label for="last_name">@lang('validation.attributes.frontend.last_name')</label>
+                                    <input type="text" name="last_name" id="last_name" class="form-control" placeholder="@lang('validation.attributes.frontend.last_name')" maxlength="191" required>
                                 </div><!--form-group-->
                             </div><!--col-->
                         </div><!--row-->
@@ -43,13 +34,8 @@
                         <div class="row">
                             <div class="col">
                                 <div class="form-group">
-                                    {{ html()->label(__('validation.attributes.frontend.email'))->for('email') }}
-
-                                    {{ html()->email('email')
-                                        ->class('form-control')
-                                        ->placeholder(__('validation.attributes.frontend.email'))
-                                        ->attribute('maxlength', 191)
-                                        ->required() }}
+                                    <label for="email">@lang('validation.attributes.frontend.email')</label>
+                                    <input type="email" name="email" id="email" class="form-control" placeholder="@lang('validation.attributes.frontend.email')" maxlength="191" required>
                                 </div><!--form-group-->
                             </div><!--col-->
                         </div><!--row-->
@@ -57,12 +43,8 @@
                         <div class="row">
                             <div class="col">
                                 <div class="form-group">
-                                    {{ html()->label(__('validation.attributes.frontend.password'))->for('password') }}
-
-                                    {{ html()->password('password')
-                                        ->class('form-control')
-                                        ->placeholder(__('validation.attributes.frontend.password'))
-                                        ->required() }}
+                                    <label for="password">@lang('validation.attributes.frontend.password')</label>
+                                    <input type="password" name="password" id="password" class="form-control" placeholder="@lang('validation.attributes.frontend.password')" required>
                                 </div><!--form-group-->
                             </div><!--col-->
                         </div><!--row-->
@@ -70,12 +52,8 @@
                         <div class="row">
                             <div class="col">
                                 <div class="form-group">
-                                    {{ html()->label(__('validation.attributes.frontend.password_confirmation'))->for('password_confirmation') }}
-
-                                    {{ html()->password('password_confirmation')
-                                        ->class('form-control')
-                                        ->placeholder(__('validation.attributes.frontend.password_confirmation'))
-                                        ->required() }}
+                                    <label for="password_confirmation">@lang('validation.attributes.frontend.password_confirmation')</label>
+                                    <input type="password" name="password_confirmation" id="password_confirmation" class="form-control" placeholder="@lang('validation.attributes.frontend.password_confirmation')" required>
                                 </div><!--form-group-->
                             </div><!--col-->
                         </div><!--row-->
@@ -84,7 +62,7 @@
                             <div class="row">
                                 <div class="col">
                                     @captcha
-                                    {{ html()->hidden('captcha_status', 'true') }}
+                                    <input type="hidden" name="captcha_status" value="true">
                                 </div><!--col-->
                             </div><!--row-->
                         @endif
@@ -92,11 +70,11 @@
                         <div class="row">
                             <div class="col">
                                 <div class="form-group mb-0 clearfix">
-                                    {{ form_submit(__('labels.frontend.auth.register_button')) }}
+                                    <button type="submit" class="btn btn-primary">@lang('labels.frontend.auth.register_button')</button>
                                 </div><!--form-group-->
                             </div><!--col-->
                         </div><!--row-->
-                    {{ html()->form()->close() }}
+                    </form>
 
                     <div class="row">
                         <div class="col">

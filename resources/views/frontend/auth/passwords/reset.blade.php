@@ -20,19 +20,15 @@
                         </div>
                     @endif
 
-                    {{ html()->form('POST', route('frontend.auth.password.reset'))->class('form-horizontal')->open() }}
-                        {{ html()->hidden('token', $token) }}
+                    <form method="POST" action="{{ route('frontend.auth.password.reset') }}" class="form-horizontal">
+                        @csrf
+                        <input type="hidden" name="token" value="{{ $token }}">
 
                         <div class="row">
                             <div class="col">
                                 <div class="form-group">
-                                    {{ html()->label(__('validation.attributes.frontend.email'))->for('email') }}
-
-                                    {{ html()->email('email')
-                                        ->class('form-control')
-                                        ->placeholder(__('validation.attributes.frontend.email'))
-                                        ->attribute('maxlength', 191)
-                                        ->required() }}
+                                    <label for="email">@lang('validation.attributes.frontend.email')</label>
+                                    <input type="email" name="email" id="email" class="form-control" placeholder="@lang('validation.attributes.frontend.email')" maxlength="191" required>
                                 </div><!--form-group-->
                             </div><!--col-->
                         </div><!--row-->
@@ -40,12 +36,8 @@
                         <div class="row">
                             <div class="col">
                                 <div class="form-group">
-                                    {{ html()->label(__('validation.attributes.frontend.password'))->for('password') }}
-
-                                    {{ html()->password('password')
-                                        ->class('form-control')
-                                        ->placeholder(__('validation.attributes.frontend.password'))
-                                        ->required() }}
+                                    <label for="password">@lang('validation.attributes.frontend.password')</label>
+                                    <input type="password" name="password" id="password" class="form-control" placeholder="@lang('validation.attributes.frontend.password')" required>
                                 </div><!--form-group-->
                             </div><!--col-->
                         </div><!--row-->
@@ -53,12 +45,8 @@
                         <div class="row">
                             <div class="col">
                                 <div class="form-group">
-                                    {{ html()->label(__('validation.attributes.frontend.password_confirmation'))->for('password_confirmation') }}
-
-                                    {{ html()->password('password_confirmation')
-                                        ->class('form-control')
-                                        ->placeholder(__('validation.attributes.frontend.password_confirmation'))
-                                        ->required() }}
+                                    <label for="password_confirmation">@lang('validation.attributes.frontend.password_confirmation')</label>
+                                    <input type="password" name="password_confirmation" id="password_confirmation" class="form-control" placeholder="@lang('validation.attributes.frontend.password_confirmation')" required>
                                 </div><!--form-group-->
                             </div><!--col-->
                         </div><!--row-->
@@ -66,11 +54,11 @@
                         <div class="row">
                             <div class="col">
                                 <div class="form-group mb-0 clearfix">
-                                    {{ form_submit(__('labels.frontend.passwords.reset_password_button')) }}
+                                    <button type="submit" class="btn btn-primary">@lang('labels.frontend.passwords.reset_password_button')</button>
                                 </div><!--form-group-->
                             </div><!--col-->
                         </div><!--row-->
-                    {{ html()->form()->close() }}
+                    </form>
                 </div><!-- card-body -->
             </div><!-- card -->
         </div><!-- col-6 -->

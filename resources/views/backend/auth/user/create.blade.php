@@ -67,13 +67,11 @@
                 <!--form-group-->
 
                 <div class="form-group row">
-                    {{ html()->label(__('validation.attributes.backend.access.users.password_confirmation'))->class('col-md-2 form-control-label')->for('password_confirmation') }}
-
+                    <label for="password_confirmation" class="col-md-2 form-control-label">
+                        @lang('validation.attributes.backend.access.users.password_confirmation')
+                    </label>
                     <div class="col-md-10">
-                        {{ html()->password('password_confirmation')
-                                    ->class('form-control')
-                                    ->placeholder(__('validation.attributes.backend.access.users.password_confirmation'))
-                                    ->required() }}
+                        <input type="password" name="password_confirmation" id="password_confirmation" class="form-control" placeholder="@lang('validation.attributes.backend.access.users.password_confirmation')" required>
                     </div>
                     <!--col-->
                 </div>
