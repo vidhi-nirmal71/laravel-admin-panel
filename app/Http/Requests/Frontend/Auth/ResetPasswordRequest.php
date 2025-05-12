@@ -4,7 +4,7 @@ namespace App\Http\Requests\Frontend\Auth;
 
 use App\Rules\Auth\UnusedPassword;
 use Illuminate\Foundation\Http\FormRequest;
-use LangleyFoxall\LaravelNISTPasswordRules\PasswordRules;
+use Illuminate\Validation\Rules\Password;
 
 /**
  * Class ResetPasswordRequest.
@@ -31,12 +31,12 @@ class ResetPasswordRequest extends FormRequest
         return [
             'token' => ['required'],
             'email' => ['required', 'email'],
-            'password' => array_merge(
-                [
-                    new UnusedPassword($this->get('token')),
-                ],
-                PasswordRules::changePassword($this->email)
-            ),
+            'password' => [
+                'required',
+                'confirmed',
+                Password::defaults(),
+                new UnusedPassword($this->get('token')),
+            ],
         ];
     }
 }
