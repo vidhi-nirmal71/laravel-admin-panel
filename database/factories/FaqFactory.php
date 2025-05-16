@@ -1,14 +1,20 @@
 <?php
 
-/** @var \Illuminate\Database\Eloquent\Factory $factory */
+namespace Database\Factories;
 
 use App\Models\Faq;
-use Faker\Generator as Faker;
+use Illuminate\Database\Eloquent\Factories\Factory;
 
-$factory->define(Faq::class, function (Faker $faker) {
-    return [
-        'question' => $faker->sentence,
-        'answer' => $faker->paragraph,
-        'status' => $faker->boolean,
-    ];
-});
+class FaqFactory extends Factory
+{
+    protected $model = Faq::class;
+
+    public function definition()
+    {
+        return [
+            'question' => $this->faker->sentence,
+            'answer' => $this->faker->paragraph,
+            'status' => true,
+        ];
+    }
+}

@@ -5,11 +5,12 @@ namespace App\Models;
 use App\Models\Traits\Attributes\BlogAttributes;
 use App\Models\Traits\ModelAttributes;
 use App\Models\Traits\Relationships\BlogRelationships;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Blog extends BaseModel
 {
-    use ModelAttributes, SoftDeletes, BlogAttributes, BlogRelationships;
+    use ModelAttributes, SoftDeletes, BlogAttributes, BlogRelationships, HasFactory;
 
     /**
      * Fillable.

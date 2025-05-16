@@ -1,24 +1,29 @@
 <?php
 
-/** @var \Illuminate\Database\Eloquent\Factory $factory */
+namespace Database\Factories;
 
-use App\Models\Auth\User;
 use App\Models\Blog;
-use Faker\Generator as Faker;
+use App\Models\Auth\User;
+use Illuminate\Database\Eloquent\Factories\Factory;
 
-$factory->define(Blog::class, function (Faker $faker) {
-    return [
-        'name' => $faker->words(3, true),
-        'slug' => $faker->slug,
-        'content' => $faker->paragraph,
-        'publish_datetime' => $faker->dateTime,
-        'meta_title' => $faker->words(3, true),
-        'cannonical_link' => $faker->url,
-        'meta_keywords' => $faker->word,
-        'meta_description' => $faker->paragraph,
-        'status' => $faker->numberBetween(0, 3),
-        'created_by' => function () {
-            return factory(User::class)->state('active')->create()->id;
-        },
-    ];
-});
+class BlogFactory extends Factory
+{
+    protected $model = Blog::class;
+
+    public function definition()
+    {
+        return [
+            'name' => $this->faker->words(3, true),
+            'slug' => $this->faker->slug,
+            'content' => $this->faker->paragraph,
+            'publish_datetime' => $this->faker->dateTime,
+            'meta_title' => $this->faker->words(3, true),
+            'cannonical_link' => $this->faker->url,
+            'meta_keywords' => $this->faker->word,
+            'meta_description' => $this->faker->paragraph,
+            'status' => $this->faker->numberBetween(0, 3),
+            'created_by' => (new UserFactory())->active()->create()->id,
+        ];
+    }
+}
+

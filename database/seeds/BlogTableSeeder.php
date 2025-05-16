@@ -1,37 +1,47 @@
 <?php
 
-use App\Models\Auth\User;
 use App\Models\Blog;
 use App\Models\BlogCategory;
 use App\Models\BlogTag;
+use Database\Factories\BlogCategoryFactory;
+use Database\Factories\BlogFactory;
+use Database\Factories\BlogTagFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Seeder;
+use Database\Factories\UserFactory;
 
 class BlogTableSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     */
     public function run()
     {
         if (! \App::environment(['production'])) {
             Model::unguard();
 
-            factory(Blog::class, 10)->create([
-                'created_by' => factory(User::class)->state('active')->create()->id,
-            ])->each(function ($blog) {
-                $blogCategory = factory(BlogCategory::class)->create([
-                    'created_by' => $blog->created_by,
+            $userFactory = new UserFactory();
+            $user = $userFactory->active()->create(); // create once, reuse
+
+            for ($i = 0; $i < 10; $i++) {
+                // Create blog with direct factory
+                $blog = (new BlogFactory())->create([
+                    'created_by' => $user->id,
                 ]);
 
+                // Create category with same user
+                $blogCategory = (new BlogCategoryFactory())->create([
+                    'created_by' => $user->id,
+                ]);
+
+                // Attach category to blog
                 $blog->categories()->sync([$blogCategory->id]);
 
-                $blogTag = factory(BlogTag::class)->create([
-                    'created_by' => $blog->created_by,
+                // Create tag with same user
+                $blogTag = (new BlogTagFactory())->create([
+                    'created_by' => $user->id,
                 ]);
 
+                // Attach tag to blog
                 $blog->tags()->sync([$blogTag->id]);
-            });
+            }
 
             Model::reguard();
         }

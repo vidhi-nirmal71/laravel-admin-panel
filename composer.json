@@ -10,24 +10,22 @@
     "license": "MIT",
     "require": {
         "php": "^8.3",
-        "albertcht/invisible-recaptcha": "^1.9",
         "altek/accountant": "^3.3",
         "altek/eventually": "^2.0",
-        "arcanedev/log-viewer": "^9.0",
+        "arcanedev/log-viewer": "^10.0",
         "creativeorange/gravatar": "~1.0",
         "davejamesmiller/laravel-breadcrumbs": "^5.0",
-        "fideloper/proxy": "^4.0",
-        "knuckleswtf/scribe": "^3.22",
+        "knuckleswtf/scribe": "^4.0",
         "lab404/laravel-impersonate": "^1.4",
-        "laravel/framework": "^9.52.15",
-        "laravel/passport": "^10.0",
+        "laravel/framework": "^10.47",
+        "laravel/passport": "^11.0",
         "laravel/socialite": "^5.6",
-        "laravel/ui": "^3.2",
+        "laravel/ui": "^4.0",
         "laravelcollective/html": "^6.4",
         "spatie/laravel-permission": "^5.0",
-        "symfony/console": "^6.0.9",
+        "symfony/console": "^6.2",
         "torann/geoip": "^1.0",
-        "yajra/laravel-datatables-oracle": "^9.10"
+        "yajra/laravel-datatables-oracle": "^10.0"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.2",
@@ -55,7 +53,9 @@
             "database/factories"
         ],
         "psr-4": {
-            "App\\": "app/"
+            "App\\": "app/",
+            "Database\\Factories\\": "database/factories/",
+            "Database\\Seeders\\": "database/seeders/"
         },
         "files": [
             "app/Helpers/helper.php"
