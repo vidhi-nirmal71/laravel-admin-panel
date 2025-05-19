@@ -1,23 +1,29 @@
 <?php
 
-/** @var \Illuminate\Database\Eloquent\Factory $factory */
+namespace Database\Factories;
 
-use App\Models\Auth\User;
+use Illuminate\Database\Eloquent\Factories\Factory;
 use App\Models\Page;
-use Faker\Generator as Faker;
 
-$factory->define(Page::class, function (Faker $faker) {
-    return [
-        'title' => $faker->words(4, true),
-        'page_slug' => $faker->slug,
-        'description' => $faker->paragraph,
-        'cannonical_link' => $faker->url,
-        'seo_title' => $faker->word,
-        'seo_keyword' => $faker->word,
-        'seo_description' => $faker->paragraph,
-        'status' => $faker->boolean,
-        'created_by' => function () {
-            return factory(User::class)->state('active')->create()->id;
-        },
-    ];
-});
+/**
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Page>
+ */
+class PageFactory extends Factory
+{
+    protected $model = Page::class;
+
+    public function definition()
+    {
+        return [
+            'title' => $this->faker->words(4, true),
+            'page_slug' => $this->faker->slug,
+            'description' => $this->faker->paragraph,
+            'cannonical_link' => $this->faker->url,
+            'seo_title' => $this->faker->word,
+            'seo_keyword' => $this->faker->word,
+            'seo_description' => $this->faker->paragraph,
+            'status' => $this->faker->boolean,
+            // 'created_by' will be set in seeder
+        ];
+    }
+}

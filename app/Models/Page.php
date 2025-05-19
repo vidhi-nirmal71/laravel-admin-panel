@@ -5,11 +5,12 @@ namespace App\Models;
 use App\Models\Traits\Attributes\PageAttributes;
 use App\Models\Traits\ModelAttributes;
 use App\Models\Traits\Relationships\PageRelationships;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Page extends BaseModel
 {
-    use SoftDeletes, ModelAttributes, PageRelationships, PageAttributes;
+    use SoftDeletes, ModelAttributes, PageRelationships, PageAttributes, HasFactory;
 
     /**
      * The guarded field which are not mass assignable.

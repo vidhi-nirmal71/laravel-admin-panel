@@ -7,6 +7,7 @@ use App\Models\Auth\Traits\Attributes\UserAttributes;
 use App\Models\Auth\Traits\Methods\UserMethods;
 use App\Models\Auth\Traits\Relationships\UserRelationships;
 use App\Models\Auth\Traits\Scopes\UserScopes;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Passport\HasApiTokens;
@@ -16,5 +17,5 @@ use Laravel\Passport\HasApiTokens;
  */
 class User extends BaseUser
 {
-    use HasApiTokens, Notifiable, SoftDeletes, UserAttributes, UserScopes, UserAccess, UserRelationships, UserMethods;
+    use HasApiTokens, Notifiable, SoftDeletes, UserAttributes, UserScopes, UserAccess, UserRelationships, UserMethods, HasFactory;
 }

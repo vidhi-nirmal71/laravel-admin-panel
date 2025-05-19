@@ -1,17 +1,21 @@
 <?php
 
-/** @var \Illuminate\Database\Eloquent\Factory $factory */
+namespace Database\Factories;
 
-use App\Models\Auth\User;
 use App\Models\BlogCategory;
-use Faker\Generator as Faker;
+use App\Models\Auth\User;
+use Illuminate\Database\Eloquent\Factories\Factory;
 
-$factory->define(BlogCategory::class, function (Faker $faker) {
-    return [
-        'name' => $faker->words(3, true),
-        'status' => $faker->boolean,
-        'created_by' => function () {
-            return factory(User::class)->state('active')->create()->id;
-        },
-    ];
-});
+class BlogCategoryFactory extends Factory
+{
+    protected $model = BlogCategory::class;
+
+    public function definition()
+    {
+        return [
+            'name' => $this->faker->words(3, true),
+            'status' => $this->faker->boolean,
+            'created_by' => (new UserFactory())->active()->create()->id,
+        ];
+    }
+}

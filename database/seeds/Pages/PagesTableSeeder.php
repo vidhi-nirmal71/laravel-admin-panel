@@ -1,23 +1,23 @@
 <?php
 
-use App\Models\Auth\User;
 use App\Models\Page;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Seeder;
-
+use Database\Factories\UserFactory;
 class PagesTableSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     */
     public function run()
     {
         if (! \App::environment(['production'])) {
             Model::unguard();
 
-            factory(Page::class, 10)->create([
-                'created_by' => factory(User::class)->state('active')->create()->id,
-            ]);
+            $user = (new UserFactory())->active()->create();
+
+            Page::factory()
+                ->count(10)
+                ->create([
+                    'created_by' => $user->id,
+                ]);
 
             Model::reguard();
         }

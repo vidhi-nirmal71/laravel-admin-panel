@@ -1,17 +1,22 @@
 <?php
 
-/** @var \Illuminate\Database\Eloquent\Factory $factory */
+namespace Database\Factories;
 
-use App\Models\Auth\User;
 use App\Models\BlogTag;
-use Faker\Generator as Faker;
+use App\Models\Auth\User;
+use Database\Factories\UserFactory;
+use Illuminate\Database\Eloquent\Factories\Factory;
 
-$factory->define(BlogTag::class, function (Faker $faker) {
-    return [
-        'name' => $faker->unique()->word,
-        'status' => $faker->boolean,
-        'created_by' => function () {
-            return factory(User::class)->state('active')->create()->id;
-        },
-    ];
-});
+class BlogTagFactory extends Factory
+{
+    protected $model = BlogTag::class;
+
+    public function definition()
+    {
+        return [
+            'name' => $this->faker->unique()->word,
+            'status' => $this->faker->boolean,
+            'created_by' => (new UserFactory())->active()->create()->id,
+        ];
+    }
+}
